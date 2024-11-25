@@ -80,7 +80,16 @@ if "%choixDelFichier%" == "o" (
 )
 
 if "%choixDelFichier%" == "n" (
-    rmdir 
+    rmdir "%dossier%"
+    if exist "%dossier%" (
+        echo Le dossier n'a pas pu etre supprime
+        echo Veuillez recommencer en supprimant les fichiers presents d'abord
+        pause
+    )
+    if not exist "%dossier%" (
+        echo Le dossier a ete supprimer avec succes
+        pause
+    )
 )
 
 set dossier=
