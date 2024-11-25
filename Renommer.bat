@@ -11,7 +11,7 @@ echo %1, veuillez fournir les parametres suivants :
 echo. 
 echo 1) Ancien nom : %fichier%
 echo 2) Nouveau nom : %nomFichier%
-echo r) Renommer le(s) fichier(s) 
+echo r) Renommer le(s) fichier(s) ou le dossier
 echo m) Menu principale
 echo. 
 echo Votre choix (1, 2, r ou m) : 
@@ -31,12 +31,12 @@ cls
 echo Veuillez entrer les noms du ou des fichier(s) a renommer
 set /p fichier=
 if "%fichier%" == "" (
-    echo Le nom du fichier est vide, veuillez recommencer
+    echo Le nom du fichier ou du dossier est vide, veuillez recommencer
 	pause
 	goto choixParametres1
 )
 if not exist "%fichier%" (
-	echo Le fichier est introuvable, veuillez recommencer
+	echo Le fichier ou le dossier est introuvable, veuillez recommencer
 	pause
 	goto choixParametres1
 )
@@ -45,10 +45,10 @@ goto menu
 
 :choixParametres2
 cls
-echo. Entrer le nouveau nom du fichier : 
+echo. Entrer le nouveau nom du fichier ou du dossier : 
 set /p nomFichier=
 if "%nomFichier%" == "" (
-	echo Le nom du fichier est vide, veuillez recommencer
+	echo Le nom du fichier ou du dossier est vide, veuillez recommencer
 	pause
 	goto choixParametres2
 )

@@ -31,6 +31,7 @@ cls
 echo Veuillez entrer le nom du dossier a supprimer
 set /p dossier=
 if "%dossier%" == "" (
+    :choixParametres1error
     echo Le nom du dossier est vide, veuillez recommencer
     pause
     goto choixParametres1
@@ -48,6 +49,13 @@ cls
 echo Voulez-vous supprimer le dossier meme s'il contient des fichiers ? : (o/n) 
 set /p choixDelFichier=
 echo.
+if "%choixDelFichier%" == "" (
+    :choixParametres2error
+    echo Vous n'avez specifie s'il faut supprimer le dossier meme s'il contient des fichiers, veuillez recommencer
+    pause
+    echo.
+    goto choixParametres2
+)
 if not "%choixDelFichier%" == "o" if not "%choixDelFichier%" == "n" (
     echo Vous avez choisi un mauvais parametre, veuillez recommencer
     pause
@@ -56,13 +64,30 @@ if not "%choixDelFichier%" == "o" if not "%choixDelFichier%" == "n" (
 )
 goto menu
 
+
 :choixParametress
 cls
+rem Vérifie si l'utilisateur a bien rentré toute les informations
+if "%dossier%" == "" goto choixParametres1error
+if "%choixDelFichier%" == "" goto choixParametres2error
+
 rem MANIPULATION POUR SUPPRIMER LE DOSSIER
+if "%choixDelFichier%" == "o" (
+    rmdir /S /Q "%dossier%"
+    echo. 
+    echo Le dossier a ete supprimer avec succes
+    pause
+)
+
+if "%choixDelFichier%" == "n" (
+    rmdir 
+)
+
 set dossier=
 set choixDelFichier=
 echo.
 goto menu
+
 
 :choixParametresm
 cls
